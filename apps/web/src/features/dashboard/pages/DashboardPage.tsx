@@ -1,137 +1,137 @@
-import { ArrowRight, CalendarDays, CheckCircle2, Clock3, Compass, MapPin, Mountain, NotebookPen, Plus, WalletCards } from "lucide-react";
+import { ArrowRight, CalendarDays, CheckCircle2, Compass, MapPin, Search, SlidersHorizontal, Star, TentTree } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/shared/components/base/Button";
 import { Card } from "@/shared/components/base/Card";
+import { TravelHeroIllustration } from "@/shared/components/illustrations/TravelHeroIllustration";
 
-const companionStats = [
-  { label: "Checklist", value: "0 ready", icon: CheckCircle2 },
-  { label: "Budget", value: "Rp0", icon: WalletCards },
-  { label: "Timeline", value: "Draft", icon: Clock3 },
+const categories = [
+  { label: "Mountains", icon: "⛰️" },
+  { label: "Camp", icon: "🏕️" },
+  { label: "Budget", icon: "💸" },
+  { label: "Journal", icon: "📓" },
 ];
 
-const travelSteps = [
-  { title: "Choose the route", caption: "Destination, trail, pace, and dates.", icon: Compass },
-  { title: "Pack with intention", caption: "Personal and group checklist.", icon: CheckCircle2 },
-  { title: "Write the memory", caption: "Notes, costs, and reflections.", icon: NotebookPen },
+const companionCards = [
+  {
+    title: "Merbabu Route",
+    location: "Suwanting plan",
+    rating: "4.8",
+    gradient: "from-[#b8f3e2] via-[#8fd8cf] to-[#2d7a54]",
+  },
+  {
+    title: "Prau Sunrise",
+    location: "Dieng escape",
+    rating: "4.7",
+    gradient: "from-[#ffe4a8] via-[#f6b66a] to-[#3f6f47]",
+  },
 ];
 
 export const DashboardPage = () => {
   return (
-    <div className="space-y-6 text-[#182b22]">
-      <header className="flex items-center justify-between pt-1">
-        <div>
-          <p className="text-sm font-bold text-[#8f7d62]">Good afternoon</p>
-          <h1 className="mt-1 text-3xl font-black tracking-tight">Where to next?</h1>
-        </div>
-        <div className="grid h-12 w-12 place-items-center rounded-full bg-[#fffbf4] shadow-[0_12px_28px_rgba(98,83,61,0.12)]">
-          <Mountain size={23} />
-        </div>
-      </header>
+    <div className="space-y-6 text-[#101817]">
+      <section className="relative min-h-[540px] overflow-hidden rounded-[2.6rem] bg-[#dff8ef] p-6 shadow-[0_30px_75px_rgba(13,75,62,0.12)]">
+        <TravelHeroIllustration />
 
-      <section className="relative overflow-hidden rounded-[2.5rem] bg-[#182b22] p-4 text-[#fff8ec] shadow-[0_28px_70px_rgba(24,43,34,0.24)]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,rgba(255,206,125,0.32),transparent_28%),radial-gradient(circle_at_85%_10%,rgba(125,211,252,0.22),transparent_28%)]" />
-        <div className="relative min-h-[320px] overflow-hidden rounded-[2rem] bg-gradient-to-b from-[#8ed5df] via-[#f7d69b] to-[#6b8d71] p-4">
-          <div className="absolute left-7 top-8 h-16 w-16 rounded-full bg-[#ffd07d] shadow-[0_0_50px_rgba(255,207,125,0.72)]" />
-          <div className="absolute right-5 top-9 rounded-full bg-white/60 px-3 py-1 text-xs font-black text-[#3c5b50] backdrop-blur">Personal trip</div>
-
-          <svg className="absolute bottom-0 left-0 h-44 w-full" viewBox="0 0 390 180" preserveAspectRatio="none" role="img" aria-hidden="true">
-            <path d="M0 128 L54 90 L94 112 L148 58 L207 118 L264 50 L320 110 L390 78 L390 180 L0 180 Z" fill="#183529" />
-            <path d="M148 58 L168 92 L192 102 L170 104 Z M264 50 L284 88 L308 98 L284 100 Z" fill="rgba(255,248,236,0.78)" />
-            <path d="M0 150 L64 122 L118 142 L184 100 L245 144 L304 104 L390 134 L390 180 L0 180 Z" fill="rgba(68,103,82,0.88)" />
-            <path d="M0 168 L72 148 L138 160 L205 132 L272 160 L336 142 L390 152 L390 180 L0 180 Z" fill="rgba(199,160,93,0.7)" />
-          </svg>
-
-          <div className="relative z-10 flex h-[288px] flex-col justify-between">
-            <div>
-              <p className="inline-flex items-center gap-2 rounded-full bg-white/55 px-3 py-1 text-xs font-black text-[#27483b] backdrop-blur">
-                <MapPin size={14} />
-                Altura Companion
-              </p>
-            </div>
-            <div>
-              <h2 className="max-w-[270px] text-4xl font-black leading-[0.96] tracking-tight text-white drop-shadow-md">Plan the trip, keep the story.</h2>
-              <p className="mt-3 max-w-[260px] text-sm font-medium leading-6 text-white/88 drop-shadow">A calm planner for routes, gear, budget, notes, and the little details before you go.</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="relative z-10 mt-4 grid grid-cols-[1fr_auto] gap-3">
-          <Link to="/trips/create">
-            <Button className="w-full bg-[#fff8ec] text-[#182b22] hover:bg-white">
-              <Plus className="mr-2" size={17} />
-              New trip
-            </Button>
-          </Link>
-          <Link to="/trips" className="grid h-11 w-12 place-items-center rounded-2xl bg-white/12 text-white backdrop-blur transition hover:bg-white/18">
-            <ArrowRight size={18} />
-          </Link>
-        </div>
-      </section>
-
-      <section className="grid grid-cols-3 gap-3">
-        {companionStats.map((stat) => {
-          const Icon = stat.icon;
-          return (
-            <Card key={stat.label} className="p-3">
-              <div className="grid h-10 w-10 place-items-center rounded-2xl bg-[#efe4d2] text-[#27483b]">
-                <Icon size={17} />
-              </div>
-              <p className="mt-3 text-[10px] font-black uppercase tracking-wide text-[#9a8469]">{stat.label}</p>
-              <p className="mt-1 text-sm font-black text-[#182b22]">{stat.value}</p>
-            </Card>
-          );
-        })}
-      </section>
-
-      <section className="space-y-3">
-        <div className="flex items-end justify-between">
+        <div className="relative z-10 flex h-[492px] flex-col justify-between">
           <div>
-            <p className="text-sm font-bold text-[#9a8469]">Upcoming</p>
-            <h2 className="text-2xl font-black tracking-tight">Your next escape</h2>
+            <div className="flex items-center gap-1">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#2fbea4]" />
+              <span className="h-1.5 w-1.5 rounded-full bg-[#2fbea4]" />
+              <span className="h-1.5 w-1.5 rounded-full bg-[#2fbea4]" />
+              <span className="ml-1 h-1.5 w-7 rounded-full bg-[#2fbea4]" />
+            </div>
+
+            <div className="mt-12 max-w-[260px]">
+              <p className="text-lg font-medium tracking-tight text-[#101817]">It's a Big World</p>
+              <h1 className="mt-1 text-[3.15rem] font-black leading-[0.93] tracking-[-0.08em] text-[#050807]">
+                Out There, Go Explore
+              </h1>
+            </div>
           </div>
-          <Link to="/trips" className="text-sm font-black text-[#315946]">View all</Link>
+
+          <div className="space-y-3">
+            <Link to="/trips/create">
+              <Button className="w-full text-base">
+                Get Started
+                <ArrowRight className="ml-3" size={19} />
+              </Button>
+            </Link>
+            <p className="text-center text-xs font-semibold text-white/90 drop-shadow">Your private trip companion</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="space-y-4">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <p className="text-sm font-semibold text-[#7a8782]">Hi Dicky,</p>
+            <h2 className="mt-1 max-w-[260px] text-3xl font-black leading-tight tracking-[-0.04em]">Where do you want to go?</h2>
+          </div>
+          <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-[#ffd15c] text-xl shadow-[0_12px_26px_rgba(255,209,92,0.28)]">🧭</div>
         </div>
 
-        <Card className="p-4">
-          <div className="flex gap-4">
-            <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-[1.5rem] bg-gradient-to-br from-[#a7d8d1] via-[#f2cf92] to-[#446752]">
-              <div className="absolute left-4 top-4 h-7 w-7 rounded-full bg-[#ffd27d]" />
-              <svg className="absolute bottom-0 left-0 h-16 w-full" viewBox="0 0 100 70" preserveAspectRatio="none">
-                <path d="M0 48 L18 32 L35 42 L54 20 L75 44 L100 30 L100 70 L0 70 Z" fill="#183529" />
-                <path d="M0 60 L22 50 L44 58 L66 42 L100 54 L100 70 L0 70 Z" fill="#6f8f70" />
-              </svg>
-            </div>
-            <div className="min-w-0 flex-1">
-              <p className="flex items-center gap-1.5 text-xs font-black uppercase tracking-wide text-[#a0825c]"><CalendarDays size={14} /> Draft mode</p>
-              <h3 className="mt-1 text-xl font-black leading-tight text-[#182b22]">No active trip yet</h3>
-              <p className="mt-2 text-sm leading-5 text-[#766b5d]">Create a plan and Altura will become your packing list, timeline, budget tracker, and travel journal.</p>
-            </div>
-          </div>
-        </Card>
+        <div className="flex items-center gap-3 rounded-[1.35rem] bg-white px-4 py-3 shadow-[0_16px_35px_rgba(13,75,62,0.07)]">
+          <Search size={18} className="text-[#7a8782]" />
+          <span className="flex-1 text-sm font-medium text-[#a2aaa6]">Search destination, route, or plan</span>
+          <SlidersHorizontal size={17} className="text-[#7a8782]" />
+        </div>
       </section>
 
       <section className="space-y-3">
-        <div>
-          <p className="text-sm font-bold text-[#9a8469]">Companion flow</p>
-          <h2 className="text-2xl font-black tracking-tight">Before, during, after</h2>
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-black tracking-tight">Explore Plans</h2>
+          <Link to="/trips" className="text-xs font-black text-[#2fbea4]">See all</Link>
         </div>
 
-        <div className="space-y-3">
-          {travelSteps.map((step, index) => {
-            const Icon = step.icon;
-            return (
-              <Card key={step.title} className="flex items-center gap-4 p-3">
-                <div className="grid h-12 w-12 shrink-0 place-items-center rounded-[1.25rem] bg-[#182b22] text-[#fff8ec]">
-                  <Icon size={19} />
+        <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hidden">
+          {companionCards.map((card) => (
+            <Link key={card.title} to="/trips" className="min-w-[188px]">
+              <div className={`relative h-[154px] overflow-hidden rounded-[1.55rem] bg-gradient-to-br ${card.gradient} p-3 shadow-[0_20px_40px_rgba(13,75,62,0.13)]`}>
+                <div className="absolute right-3 top-3 rounded-full bg-white/75 px-2 py-1 text-[11px] font-black text-[#101817] backdrop-blur">
+                  <Star className="mr-1 inline" size={11} fill="currentColor" />
+                  {card.rating}
                 </div>
-                <div className="min-w-0 flex-1">
-                  <p className="text-sm font-black text-[#182b22]">{step.title}</p>
-                  <p className="mt-1 text-xs leading-5 text-[#766b5d]">{step.caption}</p>
+                <svg className="absolute bottom-0 left-0 h-[76px] w-full" viewBox="0 0 188 80" preserveAspectRatio="none">
+                  <path d="M0 52 L24 36 L46 45 L72 22 L102 50 L132 28 L188 44 L188 80 L0 80 Z" fill="rgba(6,43,28,0.86)" />
+                  <path d="M0 66 L32 54 L70 62 L106 44 L148 60 L188 50 L188 80 L0 80 Z" fill="rgba(68,140,82,0.75)" />
+                </svg>
+                <div className="relative z-10 flex h-full flex-col justify-end">
+                  <p className="text-xs font-bold text-white/85">{card.location}</p>
+                  <h3 className="mt-1 text-lg font-black leading-tight text-white drop-shadow">{card.title}</h3>
                 </div>
-                <span className="rounded-full bg-[#efe4d2] px-2.5 py-1 text-xs font-black text-[#9a8469]">0{index + 1}</span>
-              </Card>
-            );
-          })}
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="space-y-3">
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-black tracking-tight">Categories</h2>
+          <Link to="/destinations" className="text-xs font-black text-[#2fbea4]">See all</Link>
+        </div>
+
+        <div className="grid grid-cols-4 gap-3">
+          {categories.map((category) => (
+            <Card key={category.label} className="p-2 text-center">
+              <div className="mx-auto grid h-12 w-12 place-items-center rounded-[1.1rem] bg-[#ecfbf6] text-xl">{category.icon}</div>
+              <p className="mt-2 text-[11px] font-black text-[#66736f]">{category.label}</p>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden rounded-[2rem] bg-white p-5 shadow-[0_22px_55px_rgba(13,75,62,0.08)]">
+        <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-[#dff8ef]" />
+        <div className="relative flex items-center gap-4">
+          <div className="grid h-16 w-16 shrink-0 place-items-center rounded-[1.35rem] bg-[#2fbea4] text-white shadow-[0_16px_35px_rgba(47,190,164,0.3)]">
+            <TentTree size={27} />
+          </div>
+          <div className="min-w-0 flex-1">
+            <p className="text-xs font-black uppercase tracking-wide text-[#2fbea4]">Trip Companion</p>
+            <h3 className="mt-1 text-xl font-black leading-tight">Before, during, after.</h3>
+            <p className="mt-1 text-sm leading-5 text-[#7a8782]">Checklist, timeline, budget, and journal will follow your trip flow.</p>
+          </div>
         </div>
       </section>
     </div>
