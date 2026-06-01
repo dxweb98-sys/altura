@@ -6,14 +6,20 @@ import { SettingsPage } from "@/features/settings/pages/SettingsPage";
 import { TripLogListPage } from "@/features/trip-logs/pages/TripLogListPage";
 import { TripPlanCreatePage } from "@/features/trip-plans/pages/TripPlanCreatePage";
 import { TripPlanListPage } from "@/features/trip-plans/pages/TripPlanListPage";
+import { WelcomePage } from "@/features/welcome/pages/WelcomePage";
 import { MobileAppShell } from "@/shared/components/layout/MobileAppShell";
 
 export const router = createBrowserRouter([
+  { path: "/", element: <WelcomePage /> },
+  {
+    path: "/dashboard",
+    element: <MobileAppShell />,
+    children: [{ index: true, element: <DashboardPage /> }],
+  },
   {
     path: "/",
     element: <MobileAppShell />,
     children: [
-      { index: true, element: <DashboardPage /> },
       { path: "trips", element: <TripPlanListPage /> },
       { path: "trips/create", element: <TripPlanCreatePage /> },
       { path: "destinations", element: <DestinationListPage /> },
