@@ -20,22 +20,22 @@ const previewMetrics = [
 
 const slides = [
   {
-    key: "route",
+    key: "summit",
     title: "Out there, go prepared",
-    subtitle: "Build your route, budget, checklist, and notes before the first step.",
-    image: "data:image/webp;base64,UklGRrpLAABXRUJQVlA4IK5LAADw0wWdASoIAw0BPmEwnUQiI6KhIhgJQAQgFhtSqcb7rjzZoOPx4vcCuVnf38rgd49E8Zks/43H8u+zy5XNn8E6rr0+b+gfg++p0faiEJRFBE/cun1Ggm4btMx6f9KME+f5pG8P/hnP+bfZ/E+p/TH5P27t+CC/1ljf+c3HBvr1u+n/n+rvp/f8B4v5d2d1/HLnUe8yspZ6u2ZdT1WYa4NNUVgiqLdErX7j84lUtYrq9Km9mZCElkC2qrJpo2Khc4GCpV/8hWSZG5yXvTSQoLwMCV+klKZKPbLEApAEmSbdgCZGgBWSGw+I4tN0IAAA/vzl0e4B1w/5BW19DIH4ah5H0I6901RwdMNOXkWR+fO/suz5dOvP0/xv79Dvtzm+Ih8//a3x8U+/3+T4z1H9/s++8PD7/0k+40s/8g/Yf7X1H9s8/3d1R+g+d/f89hD++S6gxP7f/ZnxP4U/8SgPmfb+fZ/7/H7F9SP+tT/+4Yc9H9jP6H++v9R+d0Pn/lD9nf+9hJov/s33p/zvH/hvdPuP/3VH66gf3/yD53/o+L+zfNfWf2+Mfz/1Iv1P+PIPj/lH88fzb83xj/0nB/zv71GwaH2/4MB6f/rj/0vP+E/39EJ/t+P+b/2P6J/7aPwD9s/+/sP9/ff7+f4eD8P8Pn3n/4/f++R//+7f/0//0OAGx67LOy1djp64rPpv16uhpihghAB0lWRxK8PaULsdyp9XXJcD0C3B4+rk9+Ar1qd4fFz3ek/WDj69h+Z6YChL3xFJqjzFoTTd4MAAAAA==",
+    subtitle: "Plan routes, prepare gear, track budget, and keep every field note in one calm outdoor companion.",
+    image: "data:image/webp;base64,UklGRtgLAABXRUJQVlA4IMwLAADwXgGdASrwAZwAPp1InEwmI6GhISgJQAQwEhtSqcb7rjzZoOPx4vcCuVnf38rgd49E8Zks/43H8u+zy5XNn8E6rr0+b+gfg++p0faiEJRFBE/cun1Ggm4btMx6f9KME+f5pG8P/hnP+bfZ/E+p/TH5P27t+CC/1ljf+c3HBvr1u+n/n+rvp/f8B4v5d2d1/HLnUe8yspZ6u2ZdT1WYa4NNUVgiqLdErX7j84lUtYrq9Km9mZCElkC2qrJpo2Khc4GCpV/8hWSZG5yXvTSQoLwMCV+klKZKPbLEApAEmSbdgCZGgBWSGw+I4tN0IAAA/vzl0e4B1w/5BW19DIH4ah5H0I6901RwdMNOXkWR+fO/suz5dOvP0/xv79Dvtzm+Ih8//a3x8U+/3+T4z1H9/s++8PD7/0k+40s/8g/Yf7X1H9s8/3d1R+g+d/f89hD++S6gxP7f/ZnxP4U/8SgPmfb+fZ/7/H7F9SP+tT/+4Yc9H9jP6H++v9R+d0Pn/lD9nf+9hJov/s33p/zvH/hvdPuP/3VH66gf3/yD53/o+L+zfNfWf2+Mfz/1Iv1P+PIPj/lH88fzb83xj/0nB/zv71GwaH2/4MB6f/rj/0vP+E/39EJ/t+P+b/2P6J/7aPwD9s/+/sP9/ff7+f4eD8P8Pn3n/4/f++R//+7f/0//0OAGx67LOy1djp64rPpv16uhpihghAB0lWRxK8PaULsdyp9XXJcD0C3B4+rk9+Ar1qd4fFz3ek/WDj69h+Z6YChL3xFJqjzFoTTd4MAAAAA==",
+  },
+  {
+    key: "camp",
+    title: "Camp with intention",
+    subtitle: "Turn your next escape into a clear checklist, timeline, and trip memory.",
+    image: "data:image/webp;base64,UklGRsgLAABXRUJQVlA4ILwLAADwXQGdASrwAZwAPp1InEwmI6GhISgJQAQwEhtSqcb7rjzZoOPx4vcCuVnf38rgd49E8Zks/43H8u+zy5XNn8E6rr0+b+gfg++p0faiEJRFBE/cun1Ggm4btMx6f9KME+f5pG8P/hnP+bfZ/E+p/TH5P27t+CC/1ljf+c3HBvr1u+n/n+rvp/f8B4v5d2d1/HLnUe8yspZ6u2ZdT1WYa4NNUVgiqLdErX7j84lUtYrq9Km9mZCElkC2qrJpo2Khc4GCpV/8hWSZG5yXvTSQoLwMCV+klKZKPbLEApAEmSbdgCZGgBWSGw+I4tN0IAAA/vzl0e4B1w/5BW19DIH4ah5H0I6901RwdMNOXkWR+fO/suz5dOvP0/xv79Dvtzm+Ih8//a3x8U+/3+T4z1H9/s++8PD7/0k+40s/8g/Yf7X1H9s8/3d1R+g+d/f89hD++S6gxP7f/ZnxP4U/8SgPmfb+fZ/7/H7F9SP+tT/+4Yc9H9jP6H++v9R+d0Pn/lD9nf+9hJov/s33p/zvH/hvdPuP/3VH66gf3/yD53/o+L+zfNfWf2+Mfz/1Iv1P+PIPj/lH88fzb83xj/0nB/zv71GwaH2/4MB6f/rj/0vP+E/39EJ/t+P+b/2P6J/7aPwD9s/+/sP9/ff7+f4eD8P8Pn3n/4/f++R//+7f/0//0OAGx67LOy1djp64rPpv16uhpihghAB0lWRxK8PaULsdyp9XXJcD0C3B4+rk9+Ar1qd4fFz3ek/WDj69h+Z6YChL3xFJqjzFoTTd4MAAAAA==",
   },
   {
     key: "trail",
     title: "Know the trail ahead",
-    subtitle: "Keep pace, altitude, and timeline close while planning your next escape.",
-    image: "data:image/webp;base64,UklGRohUAABXRUJQVlA4IIxUAADw3gWdASoIAw0BPmEynUQiI6KhIhgJQAQwEhtSqcb7rjzZoOPx4vcCuVnf38rgd49E8Zks/43H8u+zy5XNn8E6rr0+b+gfg++p0faiEJRFBE/cun1Ggm4btMx6f9KME+f5pG8P/hnP+bfZ/E+p/TH5P27t+CC/1ljf+c3HBvr1u+n/n+rvp/f8B4v5d2d1/HLnUe8yspZ6u2ZdT1WYa4NNUVgiqLdErX7j84lUtYrq9Km9mZCElkC2qrJpo2Khc4GCpV/8hWSZG5yXvTSQoLwMCV+klKZKPbLEApAEmSbdgCZGgBWSGw+I4tN0IAAA/vzl0e4B1w/5BW19DIH4ah5H0I6901RwdMNOXkWR+fO/suz5dOvP0/xv79Dvtzm+Ih8//a3x8U+/3+T4z1H9/s++8PD7/0k+40s/8g/Yf7X1H9s8/3d1R+g+d/f89hD++S6gxP7f/ZnxP4U/8SgPmfb+fZ/7/H7F9SP+tT/+4Yc9H9jP6H++v9R+d0Pn/lD9nf+9hJov/s33p/zvH/hvdPuP/3VH66gf3/yD53/o+L+zfNfWf2+Mfz/1Iv1P+PIPj/lH88fzb83xj/0nB/zv71GwaH2/4MB6f/rj/0vP+E/39EJ/t+P+b/2P6J/7aPwD9s/+/sP9/ff7+f4eD8P8Pn3n/4/f++R//+7f/0//0OAGx67LOy1djp64rPpv16uhpihghAB0lWRxK8PaULsdyp9XXJcD0C3B4+rk9+Ar1qd4fFz3ek/WDj69h+Z6YChL3xFJqjzFoTTd4MAAAAA==",
-  },
-  {
-    key: "camp",
-    title: "Keep the story after",
-    subtitle: "Save field notes, real costs, and reflections after every trip.",
-    image: "data:image/webp;base64,UklGRjYzAABXRUJQVlA4ICozAADwqQWdASoIAw0BPmEynUQiI6KhIhgJQAQwEhtSqcb7rjzZoOPx4vcCuVnf38rgd49E8Zks/43H8u+zy5XNn8E6rr0+b+gfg++p0faiEJRFBE/cun1Ggm4btMx6f9KME+f5pG8P/hnP+bfZ/E+p/TH5P27t+CC/1ljf+c3HBvr1u+n/n+rvp/f8B4v5d2d1/HLnUe8yspZ6u2ZdT1WYa4NNUVgiqLdErX7j84lUtYrq9Km9mZCElkC2qrJpo2Khc4GCpV/8hWSZG5yXvTSQoLwMCV+klKZKPbLEApAEmSbdgCZGgBWSGw+I4tN0IAAA/vzl0e4B1w/5BW19DIH4ah5H0I6901RwdMNOXkWR+fO/suz5dOvP0/xv79Dvtzm+Ih8//a3x8U+/3+T4z1H9/s++8PD7/0k+40s/8g/Yf7X1H9s8/3d1R+g+d/f89hD++S6gxP7f/ZnxP4U/8SgPmfb+fZ/7/H7F9SP+tT/+4Yc9H9jP6H++v9R+d0Pn/lD9nf+9hJov/s33p/zvH/hvdPuP/3VH66gf3/yD53/o+L+zfNfWf2+Mfz/1Iv1P+PIPj/lH88fzb83xj/0nB/zv71GwaH2/4MB6f/rj/0vP+E/39EJ/t+P+b/2P6J/7aPwD9s/+/sP9/ff7+f4eD8P8Pn3n/4/f++R//+7f/0//0OAGx67LOy1djp64rPpv16uhpihghAB0lWRxK8PaULsdyp9XXJcD0C3B4+rk9+Ar1qd4fFz3ek/WDj69h+Z6YChL3xFJqjzFoTTd4MAAAAA==",
+    subtitle: "Keep route decisions, pace, altitude, and notes close before the first step.",
+    image: "data:image/webp;base64,UklGRsALAABXRUJQVlA4ILQIAADwXgGdASrwAZwAPp1InEwmI6GhISgJQAQwEhtSqcb7rjzZoOPx4vcCuVnf38rgd49E8Zks/43H8u+zy5XNn8E6rr0+b+gfg++p0faiEJRFBE/cun1Ggm4btMx6f9KME+f5pG8P/hnP+bfZ/E+p/TH5P27t+CC/1ljf+c3HBvr1u+n/n+rvp/f8B4v5d2d1/HLnUe8yspZ6u2ZdT1WYa4NNUVgiqLdErX7j84lUtYrq9Km9mZCElkC2qrJpo2Khc4GCpV/8hWSZG5yXvTSQoLwMCV+klKZKPbLEApAEmSbdgCZGgBWSGw+I4tN0IAAA/vzl0e4B1w/5BW19DIH4ah5H0I6901RwdMNOXkWR+fO/suz5dOvP0/xv79Dvtzm+Ih8//a3x8U+/3+T4z1H9/s++8PD7/0k+40s/8g/Yf7X1H9s8/3d1R+g+d/f89hD++S6gxP7f/ZnxP4U/8SgPmfb+fZ/7/H7F9SP+tT/+4Yc9H9jP6H++v9R+d0Pn/lD9nf+9hJov/s33p/zvH/hvdPuP/3VH66gf3/yD53/o+L+zfNfWf2+Mfz/1Iv1P+PIPj/lH88fzb83xj/0nB/zv71GwaH2/4MB6f/rj/0vP+E/39EJ/t+P+b/2P6J/7aPwD9s/+/sP9/ff7+f4eD8P8Pn3n/4/f++R//+7f/0//0OAGx67LOy1djp64rPpv16uhpihghAB0lWRxK8PaULsdyp9XXJcD0C3B4+rk9+Ar1qd4fFz3ek/WDj69h+Z6YChL3xFJqjzFoTTd4MAAAAA==",
   },
 ];
 
@@ -55,29 +55,32 @@ export const WelcomePage = () => {
 
     const slideTimer = window.setInterval(() => {
       setActiveSlide((currentSlide) => (currentSlide + 1) % slides.length);
-    }, 4200);
+    }, 4800);
 
     return () => window.clearInterval(slideTimer);
   }, [showSplash]);
 
   const currentSlide = slides[activeSlide];
-
   const greeting = useMemo(() => getGreeting(), []);
 
   const handleGetStarted = () => {
     setIsLeaving(true);
-    window.setTimeout(() => navigate("/dashboard"), 520);
+    window.setTimeout(() => navigate("/dashboard"), 560);
   };
-
-  if (showSplash) return <SplashScreen />;
 
   return (
     <main
-      className={`mx-auto h-screen max-h-screen w-full max-w-md overflow-hidden bg-[#071513] text-white shadow-2xl shadow-teal-950/20 transition-all duration-500 ${
+      className={`relative mx-auto h-screen max-h-screen w-full max-w-md overflow-hidden bg-[#071513] text-white shadow-2xl shadow-teal-950/20 transition-all duration-500 ${
         isLeaving ? "scale-[1.03] opacity-0 blur-sm" : "scale-100 opacity-100 blur-0"
       }`}
     >
-      <section className="relative flex h-full min-h-0 flex-col overflow-hidden px-7 pb-8 pt-8">
+      {!showSplash ? null : <SplashScreen />}
+
+      <section
+        className={`relative flex h-full min-h-0 flex-col overflow-hidden px-7 pb-8 pt-8 transition-all duration-700 ${
+          showSplash ? "scale-105 opacity-0 blur-md" : "scale-100 opacity-100 blur-0"
+        }`}
+      >
         {slides.map((slide, index) => (
           <div
             key={slide.key}
@@ -88,8 +91,8 @@ export const WelcomePage = () => {
           />
         ))}
 
-        <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-white/5 to-[#061f15]/88" />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.72)_0%,rgba(255,255,255,0.48)_34%,rgba(255,255,255,0.04)_68%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/16 via-white/0 to-[#061f15]/92" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.78)_0%,rgba(255,255,255,0.48)_36%,rgba(255,255,255,0.03)_70%)]" />
 
         <div className="relative z-10 flex items-center justify-between">
           <div className="flex items-center gap-1.5" aria-label={`Slide ${activeSlide + 1} of ${slides.length}`}>
