@@ -1,6 +1,7 @@
-import { Activity, CalendarDays, CheckCircle2, Clock3, Compass, Gauge, Map, Mountain, Navigation, Route, ThermometerSun, WalletCards } from "lucide-react";
+import { Activity, CalendarDays, CheckCircle2, Clock3, Compass, Gauge, LocateFixed, Map, Mountain, Navigation, Route, ThermometerSun, WalletCards } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Card } from "@/shared/components/base/Card";
+import { useGeolocation } from "@/shared/hooks/useGeolocation";
 
 const getGreeting = () => {
   const hour = new Date().getHours();
@@ -11,12 +12,13 @@ const getGreeting = () => {
   return "Good night";
 };
 
-const outdoorMetrics = [
-  { label: "Time", value: "13:08", icon: Clock3 },
-  { label: "Altitude", value: "0 m", icon: Mountain },
-  { label: "Temp", value: "--°C", icon: ThermometerSun },
-  { label: "Pace", value: "Normal", icon: Activity },
-];
+const getCurrentTime = () => {
+  return new Intl.DateTimeFormat("id-ID", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).format(new Date());
+};
 
 const tripFocus = [
   { label: "Checklist", value: "0 ready", icon: CheckCircle2 },
@@ -25,6 +27,15 @@ const tripFocus = [
 ];
 
 export const DashboardPage = () => {
+  const { altitudeLabel, coordinatesLabel, isLoading, error, requested, requestLocation } = useGeolocation();
+
+  const outdoorMetrics = [
+    { label: "Time", value: getCurrentTime(), icon: Clock3 },
+    { label: "Altitude", value: requested ? altitudeLabel : "-- m", icon: Mountain },
+    { label: "Temp", value: "--°C", icon: ThermometerSun },
+    { label: "Pace", value: "Normal", icon: Activity },
+  ];
+
   return (
     <div className="space-y-5 text-[#101817]">
       <header className="flex items-start justify-between gap-4">
@@ -32,40 +43,64 @@ export const DashboardPage = () => {
           <p className="text-sm font-semibold text-[#5f716b]">{getGreeting()}, Dicky</p>
           <h1 className="mt-1 text-[2.05rem] font-black leading-[1.02] tracking-[-0.05em]">Outdoor Companion</h1>
         </div>
-        <div className="grid h-12 w-12 place-items-center rounded-full bg-white text-[#2fbea4] shadow-[0_14px_34px_rgba(13,75,62,0.1)]">
+        <button
+          type="button"
+          onClick={requestLocation}
+          className="grid h-12 w-12 place-items-center rounded-full bg-white text-[#2fbea4] shadow-[0_14px_34px_rgba(13,75,62,0.1)] transition hover:scale-105"
+          aria-label="Enable GPS location"
+        >
           <Compass size={23} />
-        </div>
+        </button>
       </header>
 
       <section className="relative overflow-hidden rounded-[2.4rem] bg-[#101817] p-5 text-white shadow-[0_28px_70px_rgba(16,24,23,0.24)]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_16%,rgba(47,190,164,0.38),transparent_28%),radial-gradient(circle_at_88%_18%,rgba(255,209,92,0.28),transparent_24%)]" />
-        <div className="absolute bottom-0 left-0 h-32 w-full">
-          <svg className="h-full w-full" viewBox="0 0 390 140" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M0 92 L54 54 L92 75 L150 38 L204 86 L266 34 L330 82 L390 54 L390 140 L0 140 Z" fill="rgba(47,190,164,0.28)" />
-            <path d="M0 112 L66 78 L126 98 L190 62 L252 104 L318 72 L390 92 L390 140 L0 140 Z" fill="rgba(47,190,164,0.36)" />
-            <path d="M0 128 L70 104 L132 120 L202 90 L282 118 L390 104 L390 140 L0 140 Z" fill="rgba(255,255,255,0.08)" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_14%,rgba(47,190,164,0.34),transparent_26%),radial-gradient(circle_at_88%_14%,rgba(255,209,92,0.22),transparent_23%)]" />
+        <div className="absolute bottom-0 left-0 h-28 w-full opacity-70">
+          <svg className="h-full w-full" viewBox="0 0 390 120" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M0 82 L54 48 L92 68 L150 34 L204 76 L266 30 L330 72 L390 48 L390 120 L0 120 Z" fill="rgba(47,190,164,0.2)" />
+            <path d="M0 102 L66 72 L126 90 L190 58 L252 94 L318 68 L390 84 L390 120 L0 120 Z" fill="rgba(47,190,164,0.28)" />
           </svg>
         </div>
 
-        <div className="relative z-10">
-          <div className="flex items-center justify-between gap-3">
+        <div className="relative z-10 space-y-5">
+          <div className="flex items-start justify-between gap-3">
             <div>
               <p className="text-sm font-semibold text-white/65">Current readiness</p>
-              <h2 className="mt-1 text-4xl font-black tracking-[-0.06em]">Ready for the next route?</h2>
+              <h2 className="mt-1 max-w-[250px] text-[2rem] font-black leading-[1.02] tracking-[-0.06em]">Ready for the next route?</h2>
             </div>
-            <div className="grid h-14 w-14 shrink-0 place-items-center rounded-[1.25rem] bg-white/12 backdrop-blur">
-              <Gauge size={27} />
+            <div className="grid h-13 w-13 shrink-0 place-items-center rounded-[1.25rem] bg-white/12 p-3 backdrop-blur">
+              <Gauge size={25} />
             </div>
           </div>
 
-          <div className="mt-6 grid grid-cols-2 gap-3">
+          <div className="rounded-[1.5rem] bg-white/12 p-3 backdrop-blur-md">
+            <div className="flex items-center justify-between gap-3">
+              <div className="min-w-0">
+                <p className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wide text-[#73e0cc]">
+                  <LocateFixed size={13} />
+                  Current location
+                </p>
+                <p className="mt-1 truncate text-sm font-bold text-white">{coordinatesLabel}</p>
+                {error ? <p className="mt-1 text-xs font-medium text-amber-200">{error}</p> : null}
+              </div>
+              <button
+                type="button"
+                onClick={requestLocation}
+                className="shrink-0 rounded-full bg-[#2fbea4] px-3 py-2 text-xs font-black text-white shadow-[0_12px_24px_rgba(47,190,164,0.28)]"
+              >
+                {isLoading ? "Reading" : requested ? "Refresh" : "Enable GPS"}
+              </button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
             {outdoorMetrics.map((metric) => {
               const Icon = metric.icon;
               return (
-                <div key={metric.label} className="rounded-[1.25rem] bg-white/10 p-3 backdrop-blur">
+                <div key={metric.label} className="rounded-[1.25rem] bg-[#182523]/92 p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
                   <Icon size={18} className="text-[#73e0cc]" />
-                  <p className="mt-3 text-[10px] font-black uppercase tracking-wide text-white/50">{metric.label}</p>
-                  <p className="mt-1 text-lg font-black tracking-tight">{metric.value}</p>
+                  <p className="mt-3 text-[10px] font-black uppercase tracking-wide text-white/45">{metric.label}</p>
+                  <p className="mt-1 text-lg font-black tracking-tight text-white">{metric.value}</p>
                 </div>
               );
             })}
