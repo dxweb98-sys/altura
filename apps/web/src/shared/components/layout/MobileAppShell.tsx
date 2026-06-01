@@ -1,7 +1,6 @@
 import { Compass, Home, ListChecks, Map, NotebookPen, Settings } from "lucide-react";
 import { NavLink, Outlet } from "react-router-dom";
 import { cn } from "@/shared/lib/cn";
-import { AnimatedMountainBackdrop } from "./AnimatedMountainBackdrop";
 
 const navItems = [
   { label: "Home", href: "/", icon: Home },
@@ -14,16 +13,15 @@ const navItems = [
 
 export const MobileAppShell = () => {
   return (
-    <div className="relative mx-auto flex min-h-screen w-full max-w-md flex-col overflow-hidden bg-[#f7f3eb] shadow-2xl shadow-slate-900/10">
-      <AnimatedMountainBackdrop />
-      <div className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(180deg,rgba(247,243,235,0)_0%,rgba(247,243,235,0.78)_280px,#f7f3eb_420px)]" />
+    <div className="relative mx-auto flex min-h-screen w-full max-w-md flex-col overflow-hidden bg-[#f7fffc] shadow-2xl shadow-teal-950/10">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-72 bg-gradient-to-b from-[#dbf7ef] to-transparent" />
 
-      <main className="relative z-10 flex-1 px-5 pb-32 pt-6">
+      <main className="relative z-10 flex-1 px-6 pb-32 pt-7">
         <Outlet />
       </main>
 
       <nav className="fixed bottom-0 left-1/2 z-20 w-full max-w-md -translate-x-1/2 px-5 pb-5 pt-2">
-        <div className="rounded-[2rem] border border-white/80 bg-white/88 p-2 shadow-[0_22px_60px_rgba(79,70,54,0.16)] backdrop-blur-2xl">
+        <div className="rounded-[2.1rem] bg-white p-2 shadow-[0_22px_60px_rgba(13,75,62,0.15)]">
           <div className="grid grid-cols-6 gap-1">
             {navItems.map((item) => {
               const Icon = item.icon;
@@ -34,8 +32,8 @@ export const MobileAppShell = () => {
                   end={item.href === "/"}
                   className={({ isActive }) =>
                     cn(
-                      "flex min-h-[56px] flex-col items-center justify-center gap-1 rounded-[1.35rem] px-1 text-[10px] font-bold text-[#8f8578] transition-all duration-300",
-                      isActive && "-translate-y-1 bg-[#182b22] text-[#fff8ec] shadow-lg shadow-emerald-950/18",
+                      "flex min-h-[56px] flex-col items-center justify-center gap-1 rounded-[1.45rem] px-1 text-[10px] font-bold text-[#7a8782] transition-all duration-300",
+                      isActive && "bg-[#2fbea4] text-white shadow-[0_12px_26px_rgba(47,190,164,0.32)]",
                     )
                   }
                 >
