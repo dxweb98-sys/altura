@@ -1,7 +1,6 @@
 import { ArrowRight, Compass, Mountain, Navigation, ThermometerSun } from "lucide-react";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Button } from "@/shared/components/base/Button";
+import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { SplashScreen } from "../components/SplashScreen";
 
 const getGreeting = () => {
@@ -13,79 +12,115 @@ const getGreeting = () => {
   return "Good night";
 };
 
-const slides = ["Route", "Gear", "Journal", "Safety"];
-
 const previewMetrics = [
   { label: "Altitude", value: "1,428 m", icon: Mountain },
   { label: "Temp", value: "18°C", icon: ThermometerSun },
   { label: "Route", value: "Draft", icon: Navigation },
 ];
 
+const slides = [
+  {
+    key: "route",
+    title: "Out there, go prepared",
+    subtitle: "Build your route, budget, checklist, and notes before the first step.",
+    image: "data:image/webp;base64,UklGRrpLAABXRUJQVlA4IK5LAADw0wWdASoIAw0BPmEwnUQiI6KhIhgJQAQgFhtSqcb7rjzZoOPx4vcCuVnf38rgd49E8Zks/43H8u+zy5XNn8E6rr0+b+gfg++p0faiEJRFBE/cun1Ggm4btMx6f9KME+f5pG8P/hnP+bfZ/E+p/TH5P27t+CC/1ljf+c3HBvr1u+n/n+rvp/f8B4v5d2d1/HLnUe8yspZ6u2ZdT1WYa4NNUVgiqLdErX7j84lUtYrq9Km9mZCElkC2qrJpo2Khc4GCpV/8hWSZG5yXvTSQoLwMCV+klKZKPbLEApAEmSbdgCZGgBWSGw+I4tN0IAAA/vzl0e4B1w/5BW19DIH4ah5H0I6901RwdMNOXkWR+fO/suz5dOvP0/xv79Dvtzm+Ih8//a3x8U+/3+T4z1H9/s++8PD7/0k+40s/8g/Yf7X1H9s8/3d1R+g+d/f89hD++S6gxP7f/ZnxP4U/8SgPmfb+fZ/7/H7F9SP+tT/+4Yc9H9jP6H++v9R+d0Pn/lD9nf+9hJov/s33p/zvH/hvdPuP/3VH66gf3/yD53/o+L+zfNfWf2+Mfz/1Iv1P+PIPj/lH88fzb83xj/0nB/zv71GwaH2/4MB6f/rj/0vP+E/39EJ/t+P+b/2P6J/7aPwD9s/+/sP9/ff7+f4eD8P8Pn3n/4/f++R//+7f/0//0OAGx67LOy1djp64rPpv16uhpihghAB0lWRxK8PaULsdyp9XXJcD0C3B4+rk9+Ar1qd4fFz3ek/WDj69h+Z6YChL3xFJqjzFoTTd4MAAAAA==",
+  },
+  {
+    key: "trail",
+    title: "Know the trail ahead",
+    subtitle: "Keep pace, altitude, and timeline close while planning your next escape.",
+    image: "data:image/webp;base64,UklGRohUAABXRUJQVlA4IIxUAADw3gWdASoIAw0BPmEynUQiI6KhIhgJQAQwEhtSqcb7rjzZoOPx4vcCuVnf38rgd49E8Zks/43H8u+zy5XNn8E6rr0+b+gfg++p0faiEJRFBE/cun1Ggm4btMx6f9KME+f5pG8P/hnP+bfZ/E+p/TH5P27t+CC/1ljf+c3HBvr1u+n/n+rvp/f8B4v5d2d1/HLnUe8yspZ6u2ZdT1WYa4NNUVgiqLdErX7j84lUtYrq9Km9mZCElkC2qrJpo2Khc4GCpV/8hWSZG5yXvTSQoLwMCV+klKZKPbLEApAEmSbdgCZGgBWSGw+I4tN0IAAA/vzl0e4B1w/5BW19DIH4ah5H0I6901RwdMNOXkWR+fO/suz5dOvP0/xv79Dvtzm+Ih8//a3x8U+/3+T4z1H9/s++8PD7/0k+40s/8g/Yf7X1H9s8/3d1R+g+d/f89hD++S6gxP7f/ZnxP4U/8SgPmfb+fZ/7/H7F9SP+tT/+4Yc9H9jP6H++v9R+d0Pn/lD9nf+9hJov/s33p/zvH/hvdPuP/3VH66gf3/yD53/o+L+zfNfWf2+Mfz/1Iv1P+PIPj/lH88fzb83xj/0nB/zv71GwaH2/4MB6f/rj/0vP+E/39EJ/t+P+b/2P6J/7aPwD9s/+/sP9/ff7+f4eD8P8Pn3n/4/f++R//+7f/0//0OAGx67LOy1djp64rPpv16uhpihghAB0lWRxK8PaULsdyp9XXJcD0C3B4+rk9+Ar1qd4fFz3ek/WDj69h+Z6YChL3xFJqjzFoTTd4MAAAAA==",
+  },
+  {
+    key: "camp",
+    title: "Keep the story after",
+    subtitle: "Save field notes, real costs, and reflections after every trip.",
+    image: "data:image/webp;base64,UklGRjYzAABXRUJQVlA4ICozAADwqQWdASoIAw0BPmEynUQiI6KhIhgJQAQwEhtSqcb7rjzZoOPx4vcCuVnf38rgd49E8Zks/43H8u+zy5XNn8E6rr0+b+gfg++p0faiEJRFBE/cun1Ggm4btMx6f9KME+f5pG8P/hnP+bfZ/E+p/TH5P27t+CC/1ljf+c3HBvr1u+n/n+rvp/f8B4v5d2d1/HLnUe8yspZ6u2ZdT1WYa4NNUVgiqLdErX7j84lUtYrq9Km9mZCElkC2qrJpo2Khc4GCpV/8hWSZG5yXvTSQoLwMCV+klKZKPbLEApAEmSbdgCZGgBWSGw+I4tN0IAAA/vzl0e4B1w/5BW19DIH4ah5H0I6901RwdMNOXkWR+fO/suz5dOvP0/xv79Dvtzm+Ih8//a3x8U+/3+T4z1H9/s++8PD7/0k+40s/8g/Yf7X1H9s8/3d1R+g+d/f89hD++S6gxP7f/ZnxP4U/8SgPmfb+fZ/7/H7F9SP+tT/+4Yc9H9jP6H++v9R+d0Pn/lD9nf+9hJov/s33p/zvH/hvdPuP/3VH66gf3/yD53/o+L+zfNfWf2+Mfz/1Iv1P+PIPj/lH88fzb83xj/0nB/zv71GwaH2/4MB6f/rj/0vP+E/39EJ/t+P+b/2P6J/7aPwD9s/+/sP9/ff7+f4eD8P8Pn3n/4/f++R//+7f/0//0OAGx67LOy1djp64rPpv16uhpihghAB0lWRxK8PaULsdyp9XXJcD0C3B4+rk9+Ar1qd4fFz3ek/WDj69h+Z6YChL3xFJqjzFoTTd4MAAAAA==",
+  },
+];
+
 export const WelcomePage = () => {
+  const navigate = useNavigate();
   const [showSplash, setShowSplash] = useState(true);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [isLeaving, setIsLeaving] = useState(false);
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setShowSplash(false), 1400);
-    return () => window.clearTimeout(timer);
+    const splashTimer = window.setTimeout(() => setShowSplash(false), 1450);
+    return () => window.clearTimeout(splashTimer);
   }, []);
+
+  useEffect(() => {
+    if (showSplash) return undefined;
+
+    const slideTimer = window.setInterval(() => {
+      setActiveSlide((currentSlide) => (currentSlide + 1) % slides.length);
+    }, 4200);
+
+    return () => window.clearInterval(slideTimer);
+  }, [showSplash]);
+
+  const currentSlide = slides[activeSlide];
+
+  const greeting = useMemo(() => getGreeting(), []);
+
+  const handleGetStarted = () => {
+    setIsLeaving(true);
+    window.setTimeout(() => navigate("/dashboard"), 520);
+  };
 
   if (showSplash) return <SplashScreen />;
 
   return (
-    <main className="mx-auto h-screen max-h-screen w-full max-w-md overflow-hidden bg-[#071513] text-white shadow-2xl shadow-teal-950/20">
+    <main
+      className={`mx-auto h-screen max-h-screen w-full max-w-md overflow-hidden bg-[#071513] text-white shadow-2xl shadow-teal-950/20 transition-all duration-500 ${
+        isLeaving ? "scale-[1.03] opacity-0 blur-sm" : "scale-100 opacity-100 blur-0"
+      }`}
+    >
       <section className="relative flex h-full min-h-0 flex-col overflow-hidden px-7 pb-8 pt-8">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#dff8ef] via-[#b7eadc] to-[#0b2f1f]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_16%,rgba(255,209,92,0.5),transparent_18%),radial-gradient(circle_at_82%_22%,rgba(255,255,255,0.34),transparent_22%)]" />
+        {slides.map((slide, index) => (
+          <div
+            key={slide.key}
+            className={`absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-out ${
+              index === activeSlide ? "scale-100 opacity-100" : "scale-105 opacity-0"
+            }`}
+            style={{ backgroundImage: `url(${slide.image})` }}
+          />
+        ))}
 
-        <div className="absolute inset-x-0 bottom-0 h-[62%]">
-          <svg className="h-full w-full" viewBox="0 0 390 520" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M0 160 L72 72 L118 138 L194 44 L260 132 L330 60 L390 126 L390 520 L0 520 Z" fill="rgba(223,248,239,0.54)" />
-            <path d="M0 236 L78 146 L138 198 L214 110 L286 194 L390 126 L390 520 L0 520 Z" fill="rgba(117,184,126,0.78)" />
-            <path d="M0 314 L92 220 L156 276 L238 190 L322 254 L390 226 L390 520 L0 520 Z" fill="rgba(45,126,65,0.9)" />
-            <path d="M0 402 L88 330 L160 370 L252 286 L334 344 L390 318 L390 520 L0 520 Z" fill="#08351f" />
-          </svg>
-        </div>
-
-        <div className="absolute bottom-[19%] right-9 h-52 w-24 rounded-t-full bg-[#0f3a27] shadow-[0_24px_55px_rgba(0,0,0,0.2)]">
-          <div className="absolute -right-8 top-14 h-28 w-14 rounded-[1.5rem] bg-[#7ca841]" />
-          <div className="absolute -right-3 top-2 h-12 w-10 rounded-full bg-[#f1c08a]" />
-          <div className="absolute right-4 top-2 h-8 w-14 -rotate-12 rounded-full bg-[#173522]" />
-          <div className="absolute -left-5 top-16 h-32 w-5 -rotate-12 rounded-full bg-[#25533a]" />
-          <div className="absolute left-4 top-44 h-24 w-5 rounded-full bg-[#092817]" />
-          <div className="absolute right-4 top-44 h-24 w-5 rounded-full bg-[#092817]" />
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-white/5 to-[#061f15]/88" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.72)_0%,rgba(255,255,255,0.48)_34%,rgba(255,255,255,0.04)_68%)]" />
 
         <div className="relative z-10 flex items-center justify-between">
-          <div className="flex items-center gap-1.5" aria-label={`Slide 1 of ${slides.length}`}>
+          <div className="flex items-center gap-1.5" aria-label={`Slide ${activeSlide + 1} of ${slides.length}`}>
             {slides.map((slide, index) => (
-              <span
-                key={slide}
-                className={index === 0 ? "h-2 w-9 rounded-full bg-[#2fbea4]" : "h-2 w-2 rounded-full bg-[#2fbea4]/70"}
+              <button
+                key={slide.key}
+                type="button"
+                onClick={() => setActiveSlide(index)}
+                className={index === activeSlide ? "h-2 w-9 rounded-full bg-[#2fbea4]" : "h-2 w-2 rounded-full bg-white/78"}
+                aria-label={`Show ${slide.title}`}
               />
             ))}
           </div>
-          <div className="grid h-11 w-11 place-items-center rounded-full bg-white/70 text-[#101817] shadow-[0_12px_28px_rgba(13,75,62,0.1)] backdrop-blur">
+          <div className="grid h-11 w-11 place-items-center rounded-full bg-white/78 text-[#101817] shadow-[0_12px_28px_rgba(13,75,62,0.12)] backdrop-blur">
             <Compass size={21} />
           </div>
         </div>
 
-        <div className="relative z-10 mt-12 max-w-[310px] text-[#050807]">
-          <p className="text-lg font-medium tracking-tight">{getGreeting()}, Dicky</p>
-          <h1 className="mt-2 text-[3.45rem] font-black leading-[0.92] tracking-[-0.085em]">
-            Explore with direction
-          </h1>
-          <p className="mt-5 max-w-[260px] text-sm font-semibold leading-6 text-[#2d4840]">
-            Plan routes, prepare gear, track budget, and keep every field note in one calm outdoor companion.
-          </p>
+        <div className="relative z-10 mt-14 max-w-[315px] text-[#050807] transition-all duration-700">
+          <p className="text-lg font-medium tracking-tight">{greeting}, Dicky</p>
+          <h1 className="mt-2 text-[3.35rem] font-black leading-[0.93] tracking-[-0.085em]">{currentSlide.title}</h1>
+          <p className="mt-5 max-w-[270px] text-sm font-semibold leading-6 text-[#263c35]">{currentSlide.subtitle}</p>
         </div>
 
         <div className="relative z-10 mt-5 grid grid-cols-3 gap-2">
           {previewMetrics.map((metric) => {
             const Icon = metric.icon;
             return (
-              <div key={metric.label} className="rounded-[1.3rem] bg-white/70 p-3 text-[#101817] shadow-[0_14px_34px_rgba(13,75,62,0.08)] backdrop-blur">
+              <div key={metric.label} className="rounded-[1.3rem] bg-white/74 p-3 text-[#101817] shadow-[0_14px_34px_rgba(13,75,62,0.1)] backdrop-blur-md">
                 <Icon size={17} className="text-[#2fbea4]" />
-                <p className="mt-3 text-[10px] font-black uppercase tracking-wide text-[#7a8782]">{metric.label}</p>
+                <p className="mt-3 text-[10px] font-black uppercase tracking-wide text-[#6b7873]">{metric.label}</p>
                 <p className="mt-1 text-sm font-black">{metric.value}</p>
               </div>
             );
@@ -93,13 +128,15 @@ export const WelcomePage = () => {
         </div>
 
         <div className="relative z-10 mt-auto space-y-3">
-          <Link to="/dashboard">
-            <Button className="w-full text-base">
-              Get Started
-              <ArrowRight className="ml-3" size={19} />
-            </Button>
-          </Link>
-          <p className="text-center text-xs font-semibold text-white/85">Built for hiking, travel planning, and personal trip logs.</p>
+          <button
+            type="button"
+            onClick={handleGetStarted}
+            className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-[#2fbea4] px-5 py-2 text-base font-black text-white shadow-[0_16px_35px_rgba(47,190,164,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#27aa92]"
+          >
+            Get Started
+            <ArrowRight className="ml-3" size={19} />
+          </button>
+          <p className="text-center text-xs font-semibold text-white/82">Built for hiking, travel planning, and personal trip logs.</p>
         </div>
       </section>
     </main>
