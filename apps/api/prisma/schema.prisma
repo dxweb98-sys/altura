@@ -1,0 +1,150 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum DifficultyLevel {
+  EASY
+  MODERATE
+  HARD
+  EXTREME
+}
+
+enum TripPace {
+  SLOW
+  NORMAL
+  FAST
+}
+
+enum TripTarget {
+  SUNRISE
+  SUNSET
+  CAMPING
+  DAY_HIKE
+}
+
+enum TripStatus {
+  DRAFT
+  PLANNED
+  COMPLETED
+  CANCELLED
+}
+
+enum GearType {
+  PERSONAL
+  GROUP
+}
+
+enum GearPriority {
+  REQUIRED
+  RECOMMENDED
+  OPTIONAL
+}
+
+model User {
+  id           String     @id @default(uuid())
+  name         String
+  email        String     @unique
+  passwordHash String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  tripPlans    TripPlan[]
+
+  @@map("users")
+}
+
+model Destination {
+  id              String          @id @default(uuid())
+  name            String
+  type            String
+  province        String
+  region          String?
+  elevation       Int?
+  description     String?
+  bestSeason      String?
+  difficultyLevel DifficultyLevel @default(MODERATE)
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  routes          Route[]
+  tripPlans       TripPlan[]
+
+  @@map("destinations")
+}
+
+model Route {
+  id                 String          @id @default(uuid())
+  destinationId      String
+  name               String
+  basecampName       String?
+  basecampLocation   String?
+  estimatedUpHours   Float?
+  estimatedDownHours Float?
+  difficultyLevel    DifficultyLevel @default(MODERATE)
+  hasWaterSource     Boolean         @default(false)
+  campAvailable      Boolean         @default(false)
+  notes              String?
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+  destination        Destination     @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+  tripPlans          TripPlan[]
+
+  @@map("routes")
+}
+
+model TripPlan {
+  id                String       @id @default(uuid())
+  userId            String?
+  destinationId     String
+  routeId           String?
+  title             String
+  originCity        String
+  peopleCount       Int
+  budgetPerPerson   Int
+  target            TripTarget
+  pace              TripPace
+  startDate         DateTime
+  arrivalTime       String?
+  startHikingTime   String?
+  status            TripStatus   @default(DRAFT)
+  notes             String?
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+  user              User?        @relation(fields: [userId], references: [id], onDelete: SetNull)
+  destination       Destination  @relation(fields: [destinationId], references: [id], onDelete: Restrict)
+  route             Route?       @relation(fields: [routeId], references: [id], onDelete: SetNull)
+  tripLog           TripLog?
+
+  @@map("trip_plans")
+}
+
+model GearItem {
+  id        String       @id @default(uuid())
+  name      String
+  category  String
+  type      GearType
+  priority  GearPriority
+  notes     String?
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  @@map("gear_items")
+}
+
+model TripLog {
+  id              String   @id @default(uuid())
+  tripPlanId      String   @unique
+  actualBudget    Int?
+  actualUpHours   Float?
+  actualDownHours Float?
+  rating          Int?
+  reflection      String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  tripPlan        TripPlan @relation(fields: [tripPlanId], references: [id], onDelete: Cascade)
+
+  @@map("trip_logs")
+}

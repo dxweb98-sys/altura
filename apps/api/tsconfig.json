@@ -1,0 +1,10 @@
+{
+  "extends": "@altura/tsconfig/nestjs",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["src", "prisma/seed.ts"]
+}
